@@ -20,6 +20,11 @@ button {
   border: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 // popup menu
 .mobile {
   display: none;
@@ -31,27 +36,21 @@ button {
   z-index: 2;
   right: 0px;
   box-shadow: 1px 1px 10px black;
-  li:hover {
-    cursor: pointer;
-  }
   li + li {
     margin-top: 20px;
   }
 }
 
 // burger menu icon
-#open {
-  img {
-    height: 43px;
-  }
+#open,
+#close {
+  width: 43px;
+  height: 43px;
 }
 
 // cross icon
 #close {
   align-self: end;
-  img {
-    height: 43px;
-  }
 }
 
 #open:hover,
@@ -172,7 +171,6 @@ button {
     display: block;
   }
   .mobile {
-    display: flex;
     flex-direction: column;
     align-items: center;
   }

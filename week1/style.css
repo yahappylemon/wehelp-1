@@ -20,6 +20,11 @@ button {
   border: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .mobile {
   display: none;
   position: fixed;
@@ -31,22 +36,18 @@ button {
   right: 0px;
   box-shadow: 1px 1px 10px black;
 }
-.mobile li:hover {
-  cursor: pointer;
-}
 .mobile li + li {
   margin-top: 20px;
 }
 
-#open img {
+#open,
+#close {
+  width: 43px;
   height: 43px;
 }
 
 #close {
   align-self: end;
-}
-#close img {
-  height: 43px;
 }
 
 #open:hover,
@@ -161,7 +162,6 @@ button {
     display: block;
   }
   .mobile {
-    display: flex;
     flex-direction: column;
     align-items: center;
   }
