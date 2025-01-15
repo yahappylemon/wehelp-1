@@ -52,7 +52,7 @@ def find_and_print(messages, current_station):
         # 如果自己/朋友所在的station為"Xiaobitan"，從"Qizhang"出發再算距離
         Xiaobitan = all_stations.index("Xiaobitan");
         Qizhang = all_stations.index("Qizhang");
-        if (my_station == Xiaobitan < 18) and (station_index == Xiaobitan):
+        if (my_station == Xiaobitan) and (station_index == Xiaobitan):
             distance.append(0)
         elif my_station == Xiaobitan:
             distance.append(abs(station_index - Qizhang) + 1)
@@ -77,6 +77,7 @@ find_and_print(messages, "Songshan") # print Copper
 find_and_print(messages, "Qizhang") # print Leslie
 find_and_print(messages, "Ximen") # print Bob
 find_and_print(messages, "Xindian City Hall") # print Vivian
+find_and_print(messages, "Xiaobitan") # print Leslie
 
 print("===Task 2===");
 time_table = {

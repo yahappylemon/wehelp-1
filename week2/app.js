@@ -69,6 +69,7 @@ findAndPrint(messages, "Songshan"); // print Copper
 findAndPrint(messages, "Qizhang"); // print Leslie
 findAndPrint(messages, "Ximen"); // print Bob
 findAndPrint(messages, "Xindian City Hall"); // print Vivian
+findAndPrint(messages, "Xiaobitan"); // print Leslie
 
 console.log("===Task 2===");
 let timeTable = {
