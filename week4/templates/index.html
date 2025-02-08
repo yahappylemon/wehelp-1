@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 4</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="welcome">
+        <p><strong>歡迎光臨，請輸入帳號密碼</strong></p>
+      </div>
+      <form action="/signin" method="post" id="login" class="middle">
+        <p><strong>登入系統</strong></p>
+        <div>
+          <label for="account">帳號</label>
+          <input type="text" name="account" id="account" />
+        </div>
+        <div>
+          <label for="password">密碼</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div>
+          <label for="terms"
+            >同意條款<input type="checkbox" name="checkbox" id="checkbox"
+          /></label>
+        </div>
+        <div>
+          <button type="submit">登入</button>
+        </div>
+      </form>
+      <hr />
+      <div class="middle">
+        <p><strong>計算正整數的平方</strong></p>
+        <div>
+          <label for="square">正整數</label>
+          <input type="number" id="square" />
+        </div>
+        <div>
+          <button id="math">計算</button>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="../static/app.js"></script>
+</html>
