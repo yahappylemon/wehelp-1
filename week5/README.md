@@ -172,7 +172,7 @@ SELECT MESSAGE.*, MEMBER.NAME FROM MESSAGE JOIN MEMBER ON MESSAGE.MEMBER_ID = ME
 - Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender username equals to test.
 
 ```sql
-SELECT AVG(MESSAGE.like_count) FROM MESSAGE JOIN MEMBER ON MESSAGE.MEMBER_ID = MEMBER.ID WHERE MEMBER.USERNAME = 'test';
+SELECT MEMBER.USERNAME, AVG(MESSAGE.like_count) FROM MESSAGE JOIN MEMBER ON MESSAGE.MEMBER_ID = MEMBER.ID WHERE MEMBER.USERNAME = 'test';
 ```
 
 <div align=center><img src="./images/20.png" width="800px"/></div>
