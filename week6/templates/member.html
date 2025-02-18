@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 4</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="welcome">
+        <p><strong>歡迎光臨，這是會員頁</strong></p>
+      </div>
+      <div class="middle">
+        <p>{{account}}，歡迎登入系統</p>
+        <a href="/signout">登出系統</a>
+      </div>
+      <hr />
+      <form action="/createMessage" method="post" id="chat" class="middle">
+        <p><strong>快來留言吧</strong></p>
+        <div>
+          <label for="message">內容</label>
+          <input type="message" name="message" id="message" />
+        </div>
+        <div>
+          <button type="submit">送出</button>
+        </div>
+      </form>
+      <hr />
+      <ul class="middle">
+        {% for message in messages %} {% if message.currentUser %}
+        <form action="/deleteMessage" method="post" id="deleteMessage">
+          <li>
+            <strong>{{ message.name}}</strong> : {{ message.message }}<button
+              type="submit"
+              class="delete"
+            >
+              <input
+                type="hidden"
+                value="{{message.currentMessage}}"
+                name="deleteID"
+              />
+              X
+            </button>
+          </li>
+        </form>
+        {% else %}
+        <li><strong>{{ message.name}}</strong> : {{ message.message }}</li>
+        {% endif %} {% endfor %}
+      </ul>
+    </main>
+  </body>
+  <script src="../static/app.js"></script>
+</html>
