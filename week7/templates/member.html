@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Week 6</title>
+    <title>Week 7</title>
     <link rel="stylesheet" href="../static/style.css" />
   </head>
   <body>
@@ -15,6 +15,23 @@
         <p>{{account}}，歡迎登入系統</p>
         <a href="/signout">登出系統</a>
       </div>
+      <hr />
+      <form class="middle" id="searchName">
+        <p><strong>查詢會員姓名</strong></p>
+        <div>
+          <input type="text" name="username" placeholder="輸入查詢對象" />
+          <button type="submit">查詢</button>
+        </div>
+        <div id="member"></div>
+      </form>
+      <form class="middle" id="updateName">
+        <p><strong>更新我的姓名</strong></p>
+        <div>
+          <input type="text" name="newName" placeholder="輸入新的姓名" />
+          <button type="submit">更新</button>
+        </div>
+        <div id="result"></div>
+      </form>
       <hr />
       <form action="/createMessage" method="post" id="chat" class="middle">
         <p><strong>快來留言吧</strong></p>
@@ -49,6 +66,6 @@
         {% endif %} {% endfor %}
       </ul>
     </main>
+    <script src="../static/app.js"></script>
   </body>
-  <script src="../static/app.js"></script>
 </html>

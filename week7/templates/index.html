@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 7</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="welcome">
+        <p><strong>歡迎光臨，請註冊登入系統</strong></p>
+      </div>
+      <form action="/signup" method="post" id="signup" class="middle">
+        <p><strong>註冊帳號</strong></p>
+        <div>
+          <label for="name">姓名</label>
+          <input type="text" name="name" id="name" />
+        </div>
+        <div>
+          <label for="username">帳號</label>
+          <input type="text" name="username" id="username" />
+        </div>
+        <div>
+          <label for="password">密碼</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div>
+          <button type="submit">註冊</button>
+        </div>
+      </form>
+      <hr />
+      <form action="/signin" method="post" id="login" class="middle">
+        <p><strong>登入系統</strong></p>
+        <div>
+          <label for="account">帳號</label>
+          <input type="text" name="account" id="account" />
+        </div>
+        <div>
+          <label for="password">密碼</label>
+          <input type="password" name="password" id="loginPassword" />
+        </div>
+        <div>
+          <button type="submit">登入</button>
+        </div>
+      </form>
+    </main>
+  </body>
+  <script src="../static/app.js"></script>
+</html>

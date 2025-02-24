@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 1px;
+}
+
+button:hover,
+.delete:hover {
+  cursor: pointer;
+}
+
+.delete {
+  margin-left: 2px;
+  padding: 2px;
+}
+
+.welcome {
+  background-color: #223344;
+  margin: auto;
+  color: #fff;
+  padding-block: 10px;
+  text-align: center;
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  padding: 20px 0px;
+}
