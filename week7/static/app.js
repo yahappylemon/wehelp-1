@@ -6,6 +6,7 @@ const searchName = document.getElementById("searchName");
 const member = document.getElementById("member");
 const updateName = document.getElementById("updateName");
 const result = document.getElementById("result");
+const account = document.getElementById("account");
 
 async function generalFetch(url, options) {
   try {
@@ -49,7 +50,12 @@ async function updateAccount(e) {
     body: JSON.stringify({ name: newName }),
     headers: { "Content-Type": "application/json" },
   });
-  data.ok ? (result.innerText = "更新成功") : (result.innerText = "更新失敗");
+  if (data.ok) {
+    result.innerText = "更新成功";
+    account.innerText = `${newName}，歡迎登入系統`;
+  } else {
+    result.innerText = "更新失敗";
+  }
 }
 
 function emptyInput(e) {

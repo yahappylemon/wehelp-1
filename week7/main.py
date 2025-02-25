@@ -221,6 +221,7 @@ async def updateName(request: Request):
         mycursor = mydb.cursor()
         mycursor.execute(sql, val)
         mydb.commit()
+        request.session["NAME"]=new_name
         return JSONResponse(content={"ok": True}, status_code=200)
     except mysql.connector.Error as err:
         print(f"資料庫錯誤: {err}")
