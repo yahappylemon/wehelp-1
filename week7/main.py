@@ -51,11 +51,12 @@ async def signup(request: Request, name:str=Form(...),username:str=Form(...),pas
     sql = "SELECT * FROM member WHERE username = %s"
     # must be of type list, tuple or dict
     val = (username,)
-    mydb = connect_to_DB(db_host, db_user, db_password, db_name)
-    mycursor = mydb.cursor()
     try:
+        mydb = connect_to_DB(db_host, db_user, db_password, db_name)
+        mycursor = mydb.cursor()
         mycursor.execute(sql, val)
         myresult = mycursor.fetchone()
+        # 使用者名稱重複
         if (myresult):
             return RedirectResponse(url="/error?message=Repeated username", status_code=303)
         else:
@@ -79,9 +80,9 @@ async def login(request: Request, account:str=Form(...),password:str=Form(...)):
         return RedirectResponse(url="/error?message=Please enter username and password", status_code=303)
     sql = "SELECT id, name, password FROM member WHERE username = %s"
     val = (account,)
-    mydb = connect_to_DB(db_host, db_user, db_password, db_name)
-    mycursor = mydb.cursor()
     try:
+        mydb = connect_to_DB(db_host, db_user, db_password, db_name)
+        mycursor = mydb.cursor()
         mycursor.execute(sql, val)
         myresult = mycursor.fetchone()
         if (myresult):
@@ -91,8 +92,10 @@ async def login(request: Request, account:str=Form(...),password:str=Form(...)):
                 request.session["ID"] = myresult[0]
                 request.session["NAME"] = myresult[1]
                 return RedirectResponse(url="/member", status_code=303)
+            # 密碼錯誤
             else:
                 return RedirectResponse(url="/error?message=Username or password is not correct", status_code=303)
+        # 使用者名稱或密碼錯誤
         else:
             return RedirectResponse(url="/error?message=Username or password is not correct", status_code=303)
     except mysql.connector.Error as err:
@@ -113,9 +116,9 @@ async def success(request: Request):
     if not request.session.get("SIGNED-IN", False):
         return RedirectResponse(url="/", status_code=303)
     sql = "SELECT MEMBER.ID, MEMBER.NAME, MESSAGE.ID, MESSAGE.content FROM MESSAGE JOIN MEMBER ON MESSAGE.MEMBER_ID = MEMBER.ID ORDER BY MESSAGE.time DESC"
-    mydb = connect_to_DB(db_host, db_user, db_password, db_name)
-    mycursor = mydb.cursor()
     try:
+        mydb = connect_to_DB(db_host, db_user, db_password, db_name)
+        mycursor = mydb.cursor()
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
         object=[]
@@ -138,9 +141,9 @@ async def createMessage(request: Request, message:str=Form(...)):
         return RedirectResponse(url="/error?message=Please enter message", status_code=303)
     sql = "INSERT INTO message (member_id, content) VALUES (%s, %s)"
     val = (request.session["ID"],message)
-    mydb = connect_to_DB(db_host, db_user, db_password, db_name)
-    mycursor = mydb.cursor()
     try:
+        mydb = connect_to_DB(db_host, db_user, db_password, db_name)
+        mycursor = mydb.cursor()
         mycursor.execute(sql, val)
         mydb.commit()
         return RedirectResponse(url="/member", status_code=303)
@@ -156,17 +159,17 @@ async def createMessage(request: Request, message:str=Form(...)):
 async def deleteMessage(request: Request, deleteID:str=Form(...)):
     if not request.session.get("SIGNED-IN", False):
         return RedirectResponse(url="/", status_code=303)
-    sql = "SELECT member_id FROM message WHERE id = %s"
-    val = (deleteID,)
-    mydb = connect_to_DB(db_host, db_user, db_password, db_name)
-    mycursor = mydb.cursor()
-    mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()
-    if(not myresult or myresult[0]!=request.session["ID"]):
-        return RedirectResponse(url="/error?message=Permission denied", status_code=303)
-    sql = "DELETE FROM message WHERE id = %s"
-    val = (deleteID,)
     try:
+        sql = "SELECT member_id FROM message WHERE id = %s"
+        val = (deleteID,)
+        mydb = connect_to_DB(db_host, db_user, db_password, db_name)
+        mycursor = mydb.cursor()
+        mycursor.execute(sql, val)
+        myresult = mycursor.fetchone()
+        if not myresult or myresult[0]!=request.session["ID"]:
+            return RedirectResponse(url="/error?message=Permission denied", status_code=303)
+        sql = "DELETE FROM message WHERE id = %s"
+        val = (deleteID,)
         mycursor.execute(sql, val)
         mydb.commit()
         return RedirectResponse(url="/member", status_code=303)
@@ -200,6 +203,10 @@ async def searchAccount(request: Request, username:str = Query(...)):
     except mysql.connector.Error as err:
         print(f"資料庫錯誤: {err}")
         return JSONResponse(content={"data": "null"}, status_code=500)
+    finally:
+        # release the connection resources
+        mycursor.close()
+        mydb.close()
 # Name Update API
 @app.patch("/api/member")
 async def updateName(request: Request):
@@ -218,4 +225,8 @@ async def updateName(request: Request):
     except mysql.connector.Error as err:
         print(f"資料庫錯誤: {err}")
         return JSONResponse(content={"error": True}, status_code=500)
+    finally:
+        # release the connection resources
+        mycursor.close()
+        mydb.close()
     
