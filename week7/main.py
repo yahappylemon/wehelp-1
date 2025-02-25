@@ -184,7 +184,7 @@ async def deleteMessage(request: Request, deleteID:str=Form(...)):
 @app.get("/api/member")
 async def searchAccount(request: Request, username:str = Query(...)):
     if not request.session.get("SIGNED-IN", False) or not username.strip():
-            return JSONResponse(content={"data": "null"}, status_code=404)
+            return JSONResponse(content={"data": None}, status_code=404)
     sql = "SELECT id, name, username FROM member WHERE username = %s"
     val = (username,)
     try:
@@ -193,7 +193,7 @@ async def searchAccount(request: Request, username:str = Query(...)):
         mycursor.execute(sql, val)
         myresult = mycursor.fetchone()
         if not myresult:
-            return JSONResponse(content={"data": "null"}, status_code=404)
+            return JSONResponse(content={"data": None}, status_code=404)
         response_data={
                 "id":myresult[0],
                 "name":myresult[1],
@@ -202,7 +202,7 @@ async def searchAccount(request: Request, username:str = Query(...)):
         return JSONResponse(content={"data": response_data}, status_code=200)
     except mysql.connector.Error as err:
         print(f"資料庫錯誤: {err}")
-        return JSONResponse(content={"data": "null"}, status_code=500)
+        return JSONResponse(content={"data": None}, status_code=500)
     finally:
         # release the connection resources
         mycursor.close()

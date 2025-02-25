@@ -30,7 +30,7 @@ async function searchAccount(e) {
   let data = await generalFetch(
     `http://127.0.0.1:8000/api/member?username=${encodeURIComponent(username)}`
   );
-  data.data === "null"
+  data.data === null
     ? (member.innerText = "No Data")
     : (member.innerText = `${data.data.name}(${data.data.username})`);
 }
