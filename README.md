@@ -1,6 +1,6 @@
 ### **WeHelp Bootcamp**
 
-- **Bootcamp 簡介**：利用半年集訓時間，提供密集任務和專案實作、求職導向模式，訓練你成為一個前端工程師、後端工程師。（<a href="https://wehelp.tw/bootcamp">詳細介紹</a>）
+- **Bootcamp 簡介**：利用半年集訓時間，提供密集任務和專案實作、求職導向模式，訓練你成為一個前端工程師、後端工程師。（<a href="https://wehelp.tw/bootcamp" target="_blank">詳細介紹</a>）
 
 **第一階段：網站開發基礎**
 
